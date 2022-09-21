@@ -19,47 +19,41 @@ import (
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/config"
-	"go.opentelemetry.io/collector/config/configgrpc"
-	"go.opentelemetry.io/collector/config/confighttp"
-	"go.opentelemetry.io/collector/config/confignet"
 	"go.opentelemetry.io/collector/consumer"
 	"go.opentelemetry.io/collector/internal/sharedcomponent"
 )
 
 const (
 	typeStr = "otlp"
-
-	defaultGRPCEndpoint = "0.0.0.0:4317"
-	defaultHTTPEndpoint = "0.0.0.0:4318"
 )
 
 // NewFactory creates a new OTLP receiver factory.
-func NewFactory() component.ReceiverFactory {
+func NewFactory(
+	tsw *TraceServerWrapper,
+	msw *MetricServerWrapper,
+	lsw *LogServerWrapper,
+) component.ReceiverFactory {
 	return component.NewReceiverFactory(
 		typeStr,
-		createDefaultConfig,
+		createDefaultConfig(tsw, msw, lsw),
 		component.WithTracesReceiver(createTracesReceiver, component.StabilityLevelStable),
 		component.WithMetricsReceiver(createMetricsReceiver, component.StabilityLevelStable),
 		component.WithLogsReceiver(createLogReceiver, component.StabilityLevelBeta))
 }
 
 // createDefaultConfig creates the default configuration for receiver.
-func createDefaultConfig() config.Receiver {
-	return &Config{
-		ReceiverSettings: config.NewReceiverSettings(config.NewComponentID(typeStr)),
-		Protocols: Protocols{
-			GRPC: &configgrpc.GRPCServerSettings{
-				NetAddr: confignet.NetAddr{
-					Endpoint:  defaultGRPCEndpoint,
-					Transport: "tcp",
-				},
-				// We almost write 0 bytes, so no need to tune WriteBufferSize.
-				ReadBufferSize: 512 * 1024,
-			},
-			HTTP: &confighttp.HTTPServerSettings{
-				Endpoint: defaultHTTPEndpoint,
-			},
-		},
+func createDefaultConfig(
+	tsw *TraceServerWrapper,
+	msw *MetricServerWrapper,
+	lsw *LogServerWrapper,
+) component.ReceiverCreateDefaultConfigFunc {
+	return func() config.Receiver {
+		return &Config{
+			ReceiverSettings:    config.NewReceiverSettings(config.NewComponentID(typeStr)),
+			traceServerWrapper:  tsw,
+			metricServerWrapper: msw,
+			logServerWrapper:    lsw,
+		}
 	}
 }
 
