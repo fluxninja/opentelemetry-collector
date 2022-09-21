@@ -19,9 +19,6 @@ import (
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/config"
-	"go.opentelemetry.io/collector/config/configgrpc"
-	"go.opentelemetry.io/collector/config/confighttp"
-	"go.opentelemetry.io/collector/config/confignet"
 	"go.opentelemetry.io/collector/consumer"
 	"go.opentelemetry.io/collector/internal/sharedcomponent"
 	"go.opentelemetry.io/collector/receiver"
@@ -29,38 +26,35 @@ import (
 
 const (
 	typeStr = "otlp"
-
-	defaultGRPCEndpoint = "0.0.0.0:4317"
-	defaultHTTPEndpoint = "0.0.0.0:4318"
 )
 
 // NewFactory creates a new OTLP receiver factory.
-func NewFactory() receiver.Factory {
+func NewFactory(
+	tsw *TraceServerWrapper,
+	msw *MetricServerWrapper,
+	lsw *LogServerWrapper,
+) receiver.Factory {
 	return receiver.NewFactory(
 		typeStr,
-		createDefaultConfig,
+		createDefaultConfig(tsw, msw, lsw),
 		receiver.WithTraces(createTraces, component.StabilityLevelStable),
 		receiver.WithMetrics(createMetrics, component.StabilityLevelStable),
 		receiver.WithLogs(createLog, component.StabilityLevelBeta))
 }
 
 // createDefaultConfig creates the default configuration for receiver.
-func createDefaultConfig() component.Config {
-	return &Config{
-		ReceiverSettings: config.NewReceiverSettings(component.NewID(typeStr)),
-		Protocols: Protocols{
-			GRPC: &configgrpc.GRPCServerSettings{
-				NetAddr: confignet.NetAddr{
-					Endpoint:  defaultGRPCEndpoint,
-					Transport: "tcp",
-				},
-				// We almost write 0 bytes, so no need to tune WriteBufferSize.
-				ReadBufferSize: 512 * 1024,
-			},
-			HTTP: &confighttp.HTTPServerSettings{
-				Endpoint: defaultHTTPEndpoint,
-			},
-		},
+func createDefaultConfig(
+	tsw *TraceServerWrapper,
+	msw *MetricServerWrapper,
+	lsw *LogServerWrapper,
+) component.CreateDefaultConfigFunc {
+	return func() component.Config {
+		return &Config{
+			ReceiverSettings:    config.NewReceiverSettings(component.NewID(typeStr)),
+			traceServerWrapper:  tsw,
+			metricServerWrapper: msw,
+			logServerWrapper:    lsw,
+		}
 	}
 }
 
