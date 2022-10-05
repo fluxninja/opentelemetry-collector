@@ -104,6 +104,8 @@ replace go.opentelemetry.io/collector/service => ./service
 
 replace go.opentelemetry.io/collector/extension/zpagesextension => ./extension/zpagesextension
 
+replace go.opentelemetry.io/collector/processor/batchprocessor => ./processor/batchprocessor
+
 retract (
 	v0.76.0 // Depends on retracted pdata v1.0.0-rc10 module, use v0.76.1
 	v0.69.0 // Release failed, use v0.69.1

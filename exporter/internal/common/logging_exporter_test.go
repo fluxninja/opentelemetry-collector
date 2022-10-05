@@ -9,9 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.uber.org/zap/zaptest"
 
-	"go.opentelemetry.io/collector/config/configtelemetry"
 	"go.opentelemetry.io/collector/exporter/exportertest"
 	"go.opentelemetry.io/collector/internal/testdata"
 	"go.opentelemetry.io/collector/pdata/plog"
@@ -56,7 +54,7 @@ func TestLoggingLogsExporterNoErrors(t *testing.T) {
 }
 
 func TestLoggingExporterErrors(t *testing.T) {
-	le := newLoggingExporter(zaptest.NewLogger(t), configtelemetry.LevelDetailed)
+	le := newLoggingExporter()
 	require.NotNil(t, le)
 
 	errWant := errors.New("my error")
