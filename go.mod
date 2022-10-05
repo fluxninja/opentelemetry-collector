@@ -70,7 +70,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
+	github.com/power-devops/perfstat v0.0.0-20220216144756-c35f1ee13d7c // indirect
 	github.com/prometheus/procfs v0.9.0 // indirect
 	github.com/prometheus/statsd_exporter v0.22.7 // indirect
 	github.com/shoenig/go-m1cpu v0.1.4 // indirect
@@ -104,6 +104,8 @@ replace go.opentelemetry.io/collector/pdata => ./pdata
 replace go.opentelemetry.io/collector/receiver => ./receiver
 
 replace go.opentelemetry.io/collector/extension/zpagesextension => ./extension/zpagesextension
+
+replace go.opentelemetry.io/collector/processor/batchprocessor => ./processor/batchprocessor
 
 retract (
 	v0.76.0 // Depends on retracted pdata v1.0.0-rc10 module, use v0.76.1
