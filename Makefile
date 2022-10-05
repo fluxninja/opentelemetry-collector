@@ -238,7 +238,7 @@ gendependabot: $(eval SHELL:=/bin/bash)
 OPENTELEMETRY_PROTO_SRC_DIR=pdata/internal/opentelemetry-proto
 
 # The SHA matching the current version of the proto to use
-OPENTELEMETRY_PROTO_VERSION=v0.19.0
+OPENTELEMETRY_PROTO_VERSION=v0.19.0-fn.patch.1
 
 # Find all .proto files.
 OPENTELEMETRY_PROTO_FILES := $(subst $(OPENTELEMETRY_PROTO_SRC_DIR)/,,$(wildcard $(OPENTELEMETRY_PROTO_SRC_DIR)/opentelemetry/proto/*/v1/*.proto $(OPENTELEMETRY_PROTO_SRC_DIR)/opentelemetry/proto/collector/*/v1/*.proto))
@@ -263,7 +263,7 @@ genproto-cleanup:
 # Generate OTLP Protobuf Go files. This will place generated files in PROTO_TARGET_GEN_DIR.
 genproto: genproto-cleanup
 	mkdir -p ${OPENTELEMETRY_PROTO_SRC_DIR}
-	curl -sSL https://api.github.com/repos/open-telemetry/opentelemetry-proto/tarball/${OPENTELEMETRY_PROTO_VERSION} | tar xz --strip 1 -C ${OPENTELEMETRY_PROTO_SRC_DIR}
+	curl -sSL https://api.github.com/repos/fluxninja/opentelemetry-proto/tarball/${OPENTELEMETRY_PROTO_VERSION} | tar xz --strip 1 -C ${OPENTELEMETRY_PROTO_SRC_DIR}
 	# Call a sub-make to ensure OPENTELEMETRY_PROTO_FILES is populated
 	$(MAKE) genproto_sub
 	$(MAKE) fmt
