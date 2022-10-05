@@ -57,7 +57,7 @@ func createDefaultConfig() config.Exporter {
 func createTracesExporter(ctx context.Context, set component.ExporterCreateSettings, config config.Exporter) (component.TracesExporter, error) {
 	cfg := config.(*Config)
 	exporterLogger := createLogger(cfg, set.TelemetrySettings.Logger)
-	s := newLoggingExporter(exporterLogger, cfg.LogLevel)
+	s := newLoggingExporter()
 	return exporterhelper.NewTracesExporter(ctx, set, cfg,
 		s.pushTraces,
 		exporterhelper.WithCapabilities(consumer.Capabilities{MutatesData: false}),
@@ -72,7 +72,7 @@ func createTracesExporter(ctx context.Context, set component.ExporterCreateSetti
 func createMetricsExporter(ctx context.Context, set component.ExporterCreateSettings, config config.Exporter) (component.MetricsExporter, error) {
 	cfg := config.(*Config)
 	exporterLogger := createLogger(cfg, set.TelemetrySettings.Logger)
-	s := newLoggingExporter(exporterLogger, cfg.LogLevel)
+	s := newLoggingExporter()
 	return exporterhelper.NewMetricsExporter(ctx, set, cfg,
 		s.pushMetrics,
 		exporterhelper.WithCapabilities(consumer.Capabilities{MutatesData: false}),
@@ -87,7 +87,7 @@ func createMetricsExporter(ctx context.Context, set component.ExporterCreateSett
 func createLogsExporter(ctx context.Context, set component.ExporterCreateSettings, config config.Exporter) (component.LogsExporter, error) {
 	cfg := config.(*Config)
 	exporterLogger := createLogger(cfg, set.TelemetrySettings.Logger)
-	s := newLoggingExporter(exporterLogger, cfg.LogLevel)
+	s := newLoggingExporter()
 	return exporterhelper.NewLogsExporter(ctx, set, cfg,
 		s.pushLogs,
 		exporterhelper.WithCapabilities(consumer.Capabilities{MutatesData: false}),
