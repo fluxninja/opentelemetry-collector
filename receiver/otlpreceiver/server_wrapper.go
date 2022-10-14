@@ -11,9 +11,9 @@ import (
 
 var _ ptraceotlp.GRPCServer = (*TraceServerWrapper)(nil)
 
-// TraceServerWrapper is a thin wrapper around ptraceotlp.Server. It can be registered
-// in grpc.Server and the underlying ptraceotlp.Server can be set even after the
-// grpc.Server is started.
+// TraceServerWrapper is a thin wrapper around ptraceotlp.GRPCServer. It can be registered
+// in grpc.GRPCServer and the underlying ptraceotlp.GRPCServer can be set even after the
+// grpc.GRPCServer is started.
 type TraceServerWrapper struct {
 	server ptraceotlp.GRPCServer
 }
@@ -27,9 +27,9 @@ func (s *TraceServerWrapper) Export(ctx context.Context, r ptraceotlp.ExportRequ
 
 var _ pmetricotlp.GRPCServer = (*MetricServerWrapper)(nil)
 
-// MetricServerWrapper is a thin wrapper around pmetricotlp.Server. It can be registered
-// in grpc.Server and the underlying pmetricotlp.Server can be set even after the
-// grpc.Server is started.
+// MetricServerWrapper is a thin wrapper around pmetricotlp.GRPCServer. It can be registered
+// in grpc.GRPCServer and the underlying pmetricotlp.GRPCServer can be set even after the
+// grpc.GRPCServer is started.
 type MetricServerWrapper struct {
 	server pmetricotlp.GRPCServer
 }
@@ -43,9 +43,9 @@ func (s *MetricServerWrapper) Export(ctx context.Context, r pmetricotlp.ExportRe
 
 var _ plogotlp.GRPCServer = (*LogServerWrapper)(nil)
 
-// LogServerWrapper is a thin wrapper around plogotlp.Server. It can be registered
-// in grpc.Server and the underlying plogotlp.Server can be set even after the
-// grpc.Server is started.
+// LogServerWrapper is a thin wrapper around plogotlp.GRPCServer. It can be registered
+// in grpc.GRPCServer and the underlying plogotlp.GRPCServer can be set even after the
+// grpc.GRPCServer is started.
 type LogServerWrapper struct {
 	server plogotlp.GRPCServer
 }
