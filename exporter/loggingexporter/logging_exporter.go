@@ -58,7 +58,7 @@ func (s *loggingExporter) pushMetrics(_ context.Context, md pmetric.Metrics) err
 }
 
 func (s *loggingExporter) pushLogs(_ context.Context, ld plog.Logs) error {
-	log.Trace().Int("#logs", ld.LogRecordCount()).Msg("LogsExporter")
+	log.Info().Int("#logs", ld.LogRecordCount()).Msg("LogsExporter")
 
 	buf, err := s.logsMarshaler.MarshalLogs(ld)
 	if err != nil {
