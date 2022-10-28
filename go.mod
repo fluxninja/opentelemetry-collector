@@ -44,7 +44,6 @@ require (
 )
 
 require (
-	cloud.google.com/go v0.102.1 // indirect
 	cloud.google.com/go/compute v1.9.0 // indirect
 	github.com/benbjohnson/clock v1.3.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -88,7 +87,7 @@ replace go.opentelemetry.io/collector/semconv => ./semconv
 
 replace go.opentelemetry.io/collector/pdata => ./pdata
 
-replace cloud.google.com/go => cloud.google.com/go v0.100.2
+replace cloud.google.com/go => cloud.google.com/go v0.102.1
 
 retract (
 	v0.57.1 // Release failed, use v0.57.2
