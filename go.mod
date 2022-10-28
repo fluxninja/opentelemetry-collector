@@ -104,7 +104,7 @@ replace go.opentelemetry.io/collector/extension/zpagesextension => ./extension/z
 
 replace go.opentelemetry.io/collector/processor/batchprocessor => ./processor/batchprocessor
 
-replace cloud.google.com/go => cloud.google.com/go v0.100.2
+replace cloud.google.com/go => cloud.google.com/go v0.102.1
 
 retract (
 	v0.57.1 // Release failed, use v0.57.2
