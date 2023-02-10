@@ -17,7 +17,7 @@ tag_components=(
     "receiver/otlpreceiver/"
     ""
 )
-upstream_version=$(curl -sL https://api.github.com/repos/open-telemetry/opentelemetry-collector/releases/latest | jq -r ".tag_name" -e)
+upstream_version=$(curl -sL https://api.github.com/repos/open-telemetry/opentelemetry-collector/releases/latest | jq -r ".tag_name" -e | sed 's/cmd\/builder\///g')
 otel_version="${2:-${upstream_version}}"
 patch_number="${3:-1}"
 tag_version="${otel_version}-fn.patch.${patch_number}"
