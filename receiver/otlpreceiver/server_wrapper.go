@@ -15,7 +15,8 @@ var _ ptraceotlp.GRPCServer = (*TraceServerWrapper)(nil)
 // in grpc.GRPCServer and the underlying ptraceotlp.GRPCServer can be set even after the
 // grpc.GRPCServer is started.
 type TraceServerWrapper struct {
-	server *ptraceotlp.UnimplementedGRPCServer
+	ptraceotlp.UnimplementedGRPCServer
+	server ptraceotlp.GRPCServer
 }
 
 func (s *TraceServerWrapper) Export(ctx context.Context, r ptraceotlp.ExportRequest) (ptraceotlp.ExportResponse, error) {
@@ -31,7 +32,8 @@ var _ pmetricotlp.GRPCServer = (*MetricServerWrapper)(nil)
 // in grpc.GRPCServer and the underlying pmetricotlp.GRPCServer can be set even after the
 // grpc.GRPCServer is started.
 type MetricServerWrapper struct {
-	server *pmetricotlp.UnimplementedGRPCServer
+	pmetricotlp.UnimplementedGRPCServer
+	server pmetricotlp.GRPCServer
 }
 
 func (s *MetricServerWrapper) Export(ctx context.Context, r pmetricotlp.ExportRequest) (pmetricotlp.ExportResponse, error) {
@@ -47,7 +49,8 @@ var _ plogotlp.GRPCServer = (*LogServerWrapper)(nil)
 // in grpc.GRPCServer and the underlying plogotlp.GRPCServer can be set even after the
 // grpc.GRPCServer is started.
 type LogServerWrapper struct {
-	server *plogotlp.UnimplementedGRPCServer
+	plogotlp.UnimplementedGRPCServer
+	server plogotlp.GRPCServer
 }
 
 func (s *LogServerWrapper) Export(ctx context.Context, r plogotlp.ExportRequest) (plogotlp.ExportResponse, error) {
