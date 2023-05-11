@@ -1,6 +1,8 @@
 module go.opentelemetry.io/collector/receiver/otlpreceiver
 
-go 1.20
+go 1.21
+
+toolchain go1.21.4
 
 require (
 	github.com/gogo/protobuf v1.3.2
@@ -15,7 +17,7 @@ require (
 )
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
