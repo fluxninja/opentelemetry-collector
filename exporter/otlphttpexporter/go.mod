@@ -1,6 +1,8 @@
 module go.opentelemetry.io/collector/exporter/otlphttpexporter
 
-go 1.20
+go 1.21
+
+toolchain go1.21.3
 
 require (
 	github.com/stretchr/testify v1.8.4
@@ -24,7 +26,7 @@ require (
 
 require (
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-logr/logr v1.3.0 // indirect
