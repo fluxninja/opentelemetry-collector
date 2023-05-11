@@ -1,7 +1,9 @@
 // Deprecated: loggingexporter is deprecated in favour of the debugexporter. It will be removed in September 2024.
 module go.opentelemetry.io/collector/exporter/loggingexporter
 
-go 1.20
+go 1.21
+
+toolchain go1.21.3
 
 require (
 	github.com/stretchr/testify v1.8.4
@@ -20,8 +22,8 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/fluxninja/aperture v1.6.0 // indirect
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/fluxninja/aperture/v2 v2.23.0 // indirect
 	github.com/go-kit/log v0.2.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
@@ -29,15 +31,15 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
-	github.com/google/uuid v1.3.1 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0 // indirect
+	github.com/google/uuid v1.5.0 // indirect
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/knadh/koanf/maps v0.1.1 // indirect
 	github.com/knadh/koanf/providers/confmap v0.1.0 // indirect
 	github.com/knadh/koanf/v2 v2.0.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.1-0.20231216201459-8508981c8b6c // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
@@ -50,7 +52,7 @@ require (
 	github.com/prometheus/common v0.46.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
 	github.com/prometheus/statsd_exporter v0.22.8 // indirect
-	github.com/rs/zerolog v1.29.0 // indirect
+	github.com/rs/zerolog v1.31.0 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/collector v0.93.0 // indirect
 	go.opentelemetry.io/collector/config/configretry v0.93.0 // indirect

@@ -1,6 +1,8 @@
 module go.opentelemetry.io/collector/cmd/mdatagen
 
-go 1.20
+go 1.21
+
+toolchain go1.21.6
 
 require (
 	github.com/google/go-cmp v0.6.0
@@ -21,7 +23,7 @@ require (
 	contrib.go.opencensus.io/exporter/prometheus v0.4.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/go-kit/log v0.2.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
