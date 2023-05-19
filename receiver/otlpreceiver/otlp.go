@@ -26,7 +26,6 @@ type otlpReceiver struct {
 	tracesReceiver  *trace.Receiver
 	metricsReceiver *metrics.Receiver
 	logsReceiver    *logs.Receiver
-	shutdownWG      sync.WaitGroup
 
 	obsrepGRPC *receiverhelper.ObsReport
 	obsrepHTTP *receiverhelper.ObsReport
@@ -65,12 +64,49 @@ func newOtlpReceiver(cfg *Config, set *receiver.CreateSettings) (*otlpReceiver, 
 
 // Shutdown is a method to turn off receiving.
 func (r *otlpReceiver) Shutdown(ctx context.Context) error {
+	var wg sync.WaitGroup
+	wg.Add(3)
+
+	go func() {
+		r.cfg.traceServerWrapper.switchable_handler.Shutdown()
+		wg.Done()
+	}()
+
+	go func() {
+		r.cfg.metricServerWrapper.switchable_handler.Shutdown()
+		wg.Done()
+	}()
+
+	go func() {
+		r.cfg.logServerWrapper.switchable_handler.Shutdown()
+		wg.Done()
+	}()
+
+	wg.Wait()
 	return nil
 }
 
 // Start runs the trace receiver on the gRPC server. Currently
 // it also enables the metrics receiver too.
 func (r *otlpReceiver) Start(_ context.Context, _ component.Host) error {
+	if r.tracesReceiver != nil {
+		r.cfg.traceServerWrapper.switchable_handler.Set(r.tracesReceiver)
+	} else {
+		r.cfg.traceServerWrapper.switchable_handler.SetUnimplemented()
+	}
+
+	if r.metricsReceiver != nil {
+		r.cfg.metricServerWrapper.switchable_handler.Set(r.metricsReceiver)
+	} else {
+		r.cfg.metricServerWrapper.switchable_handler.SetUnimplemented()
+	}
+
+	if r.logsReceiver != nil {
+		r.cfg.logServerWrapper.switchable_handler.Set(r.logsReceiver)
+	} else {
+		r.cfg.logServerWrapper.switchable_handler.SetUnimplemented()
+	}
+
 	return nil
 }
 
@@ -79,7 +115,6 @@ func (r *otlpReceiver) registerTraceConsumer(tc consumer.Traces) error {
 		return component.ErrNilNextConsumer
 	}
 	r.tracesReceiver = trace.New(tc, r.obsrepGRPC)
-	r.cfg.traceServerWrapper.server = r.tracesReceiver
 	return nil
 }
 
@@ -88,7 +123,6 @@ func (r *otlpReceiver) registerMetricsConsumer(mc consumer.Metrics) error {
 		return component.ErrNilNextConsumer
 	}
 	r.metricsReceiver = metrics.New(mc, r.obsrepGRPC)
-	r.cfg.metricServerWrapper.server = r.metricsReceiver
 	return nil
 }
 
@@ -97,6 +131,5 @@ func (r *otlpReceiver) registerLogsConsumer(lc consumer.Logs) error {
 		return component.ErrNilNextConsumer
 	}
 	r.logsReceiver = logs.New(lc, r.obsrepGRPC)
-	r.cfg.logServerWrapper.server = r.logsReceiver
 	return nil
 }
