@@ -22,27 +22,20 @@ func NewFactory(
 	msw *MetricServerWrapper,
 	lsw *LogServerWrapper,
 ) receiver.Factory {
-	return receiver.NewFactory(
-		typeStr,
-		createDefaultConfig(tsw, msw, lsw),
-		receiver.WithTraces(createTraces, component.StabilityLevelStable),
-		receiver.WithMetrics(createMetrics, component.StabilityLevelStable),
-		receiver.WithLogs(createLog, component.StabilityLevelBeta))
-}
-
-// createDefaultConfig creates the default configuration for receiver.
-func createDefaultConfig(
-	tsw *TraceServerWrapper,
-	msw *MetricServerWrapper,
-	lsw *LogServerWrapper,
-) component.CreateDefaultConfigFunc {
-	return func() component.Config {
+	var createDefaultConfig = func() component.Config {
 		return &Config{
 			traceServerWrapper:  tsw,
 			metricServerWrapper: msw,
 			logServerWrapper:    lsw,
 		}
 	}
+
+	return receiver.NewFactory(
+		typeStr,
+		createDefaultConfig,
+		receiver.WithTraces(createTraces, component.StabilityLevelStable),
+		receiver.WithMetrics(createMetrics, component.StabilityLevelStable),
+		receiver.WithLogs(createLog, component.StabilityLevelBeta))
 }
 
 // createTraces creates a trace receiver based on provided config.
