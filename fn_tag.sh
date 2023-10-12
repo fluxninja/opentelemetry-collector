@@ -15,6 +15,12 @@ tag_components=(
     "processor/batchprocessor/"
     "processor/memorylimiterprocessor/"
     "receiver/otlpreceiver/"
+    "connector/"
+    "exporter/"
+    "extension/"
+    "otelcol/"
+    "processor/"
+    "receiver/"
     ""
 )
 upstream_version=$(curl -sL https://api.github.com/repos/open-telemetry/opentelemetry-collector/releases/latest | jq -r ".tag_name" -e | sed 's/cmd\/builder\///g')
