@@ -632,8 +632,8 @@ github.com/envoyproxy/protoc-gen-validate v1.0.2 h1:QkIBuU5k+x7/QXPvPPnWXWlCdaBF
 github.com/envoyproxy/protoc-gen-validate v1.0.2/go.mod h1:GpiZQP3dDbg4JouG/NNS7QWXpgx6x8QiMKdmN72jogE=
 github.com/felixge/httpsnoop v1.0.3 h1:s/nj+GCswXYzN5v2DpNMuMQYe+0DDwt5WVCU6CWBdXk=
 github.com/felixge/httpsnoop v1.0.3/go.mod h1:m8KPJKqk1gH5J9DgRY2ASl2lWCfGKXixSwevea8zH2U=
-github.com/fluxninja/aperture/v2 v2.23.0 h1:Zqbkq/16QNzFm3Nvg/dp4hrQpLDlaONZZBaxifnB2ug=
-github.com/fluxninja/aperture/v2 v2.23.0/go.mod h1:t2KLS6bGqOQJ1TN7/4bvm1zQ7lq3xYci9dS3deq49w8=
+github.com/fluxninja/aperture/v2 v2.23.1-0.20231108085400-70c435d79817 h1:df/EB7AkfY0LS7Yolvzk4AzOOuHAIIUVIJwlDDtt8LI=
+github.com/fluxninja/aperture/v2 v2.23.1-0.20231108085400-70c435d79817/go.mod h1:t2KLS6bGqOQJ1TN7/4bvm1zQ7lq3xYci9dS3deq49w8=
 github.com/fogleman/gg v1.2.1-0.20190220221249-0403632d5b90/go.mod h1:R/bRT+9gY/C5z7JzPU0zXsXHKM4/ayA+zqcVNZzPa1k=
 github.com/fogleman/gg v1.3.0/go.mod h1:R/bRT+9gY/C5z7JzPU0zXsXHKM4/ayA+zqcVNZzPa1k=
 github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nosvA=

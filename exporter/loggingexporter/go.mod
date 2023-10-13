@@ -17,7 +17,7 @@ require (
 require (
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/fluxninja/aperture/v2 v2.23.0 // indirect
+	github.com/fluxninja/aperture/v2 v2.23.1-0.20231108085400-70c435d79817 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/uuid v1.4.0 // indirect

@@ -6,7 +6,7 @@ toolchain go1.21.3
 
 require (
 	github.com/cenkalti/backoff/v4 v4.2.1
-	github.com/fluxninja/aperture/v2 v2.23.0
+	github.com/fluxninja/aperture/v2 v2.23.1-0.20231108085400-70c435d79817
 	github.com/stretchr/testify v1.8.4
 	go.opencensus.io v0.24.0
 	go.opentelemetry.io/collector v0.88.0
