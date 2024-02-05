@@ -46,7 +46,7 @@ func createTraces(
 	nextConsumer consumer.Traces,
 ) (receiver.Traces, error) {
 	oCfg := cfg.(*Config)
-	r, err := receivers.GetOrAdd(
+	r, err := receivers.LoadOrStore(
 		oCfg,
 		func() (*otlpReceiver, error) {
 			return newOtlpReceiver(oCfg, &set)
@@ -71,7 +71,7 @@ func createMetrics(
 	consumer consumer.Metrics,
 ) (receiver.Metrics, error) {
 	oCfg := cfg.(*Config)
-	r, err := receivers.GetOrAdd(
+	r, err := receivers.LoadOrStore(
 		oCfg,
 		func() (*otlpReceiver, error) {
 			return newOtlpReceiver(oCfg, &set)
@@ -96,7 +96,7 @@ func createLog(
 	consumer consumer.Logs,
 ) (receiver.Logs, error) {
 	oCfg := cfg.(*Config)
-	r, err := receivers.GetOrAdd(
+	r, err := receivers.LoadOrStore(
 		oCfg,
 		func() (*otlpReceiver, error) {
 			return newOtlpReceiver(oCfg, &set)
@@ -119,4 +119,4 @@ func createLog(
 // create separate objects, they must use one otlpReceiver object per configuration.
 // When the receiver is shutdown it should be removed from this map so the same configuration
 // can be recreated successfully.
-var receivers = sharedcomponent.NewSharedComponents[*Config, *otlpReceiver]()
+var receivers = sharedcomponent.NewMap[*Config, *otlpReceiver]()
